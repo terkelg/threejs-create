@@ -14,7 +14,7 @@ import CreateApp from 'threejs-create'
 const {
   scene,
   render
- } = new CreateApp()
+} = new CreateApp()
 
 // Use three.js as you're used to
 let geometry = new THREE.IcosahedronGeometry(1, 1)
