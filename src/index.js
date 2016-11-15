@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import createControls from 'orbit-controls'
+import CreateControls from 'orbit-controls'
 import defined from 'defined'
 import WAGNER from '@superguigui/wagner'
 
@@ -9,14 +9,10 @@ const _render = Symbol('render')
 const _addEventListeners = Symbol('addEventListeners')
 const _setupPost = Symbol('setupPost')
 const _resize = Symbol('resize')
+const _usePost = Symbol('usePost')
 
 class CreateApp {
   constructor (opt = {}) {
-    // Settings
-    this.settings = {
-      post: false
-    }
-
     // Scale for retina
     const dpr = Math.min(defined(opt.maxPixelRatio, 2), window.devicePixelRatio)
 
@@ -42,21 +38,21 @@ class CreateApp {
     this.scene = new THREE.Scene()
 
     // Slick 3D orbit controller with damping
-    this.controls = createControls(Object.assign({
+    this.controls = CreateControls(Object.assign({
       canvas: this.canvas,
       distanceBounds: [1, 100],
       distance: 2.5,
       phi: 70 * Math.PI / 180
     }, opt))
 
+    // Default to no post
+    this[_usePost] = false
+
     // Bind
     this[_bind]()
 
     // Setup Event listeners
     this[_addEventListeners]()
-
-    // Setup post processing
-    this[_setupPost]()
 
     // Setup initial size & aspect ratio
     this[_resize]()
@@ -71,6 +67,18 @@ class CreateApp {
     this[_render]()
   }
 
+  /**
+   * post
+   */
+  set post (usePost = false) {
+    this[_usePost] = usePost
+    this[_setupPost]()
+  }
+
+  get post () {
+    return this[_usePost]
+  }
+
   /* --------- PRIVATE INTERFACE --------- */
 
   /**
@@ -78,7 +86,7 @@ class CreateApp {
    */
   [_resize] () {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
-    if (this.settings.post) {
+    if (this[_usePost]) {
       this.composer.setSize(window.innerWidth, window.innerHeight)
     }
     this[_updateControls]()
@@ -97,7 +105,7 @@ class CreateApp {
    */
   [_render] () {
     // choose render method here later
-    if (this.settings.post) {
+    if (this[_usePost]) {
       this.composer.reset()
       this.composer.render(this.scene, this.camera)
       this.passes.forEach((pass) => {
@@ -141,7 +149,7 @@ class CreateApp {
    * SetupPost - Setup Wagner for post processing
    */
   [_setupPost] () {
-    if (!this.settings.post) return
+    if (!this[_usePost]) return
 
     this.passes = []
     this.composer = new WAGNER.Composer(this.renderer)

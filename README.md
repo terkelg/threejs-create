@@ -27,5 +27,9 @@ scene.add(mesh)
 CreateLoop(render).start()
 ```
 
+# Features
+- Built in post-processing with WAGNER
+- Easy to extend with ES6 classes
+
 # License
 MIT © [Terkel Gjervig](https://terkel.com)

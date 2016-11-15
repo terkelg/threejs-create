@@ -15,11 +15,13 @@ class App extends CreateApp {
     // this.camera = new THREE.PerspectiveCamere....
 
     // Add post processing
-    this.settings.post = true
+    // It's already built in, you just add passes
+    // to the passes array
+    this.post = true
     this.passes = [
       new BloomPass({
-        blurAmount: 0.1,
-        applyZoomBlur: true
+        blurAmount: 3,
+        zoomBlurStrength: 0.5
       }),
       new FXAAPass()
     ]
@@ -33,26 +35,51 @@ class App extends CreateApp {
 
     // Add event listenrs
     this.addEventListeners()
+  }
 
+  start () {
     // Kick of loop
     CreateLoop(this.loop.bind(this)).start()
   }
 
   loop (dt) {
     this.time += dt / 1000
-
     this.render()
   }
 
-  onMouseMove () {}
+  onMouseMove (event) {
+    console.log('onMouseMove:')
+  }
 
-  onResize () {}
+  onResize (event) {
+    console.log('onResize:')
+  }
 
-  onKeyUp () {}
+  onKeyUp (event) {
+    console.log('onKeyUp:')
+  }
 
-  onKeyDown () {}
+  onKeyPress (event) {
+    console.log('onKeyPress:')
+  }
+
+  onKeyDown (event) {
+    console.log('onKeyDown:')
+  }
 
   addEventListeners () {
+    // Events
+    window.addEventListener('resize', this.onResize.bind(this))
+    // KeyBoard
+    window.addEventListener('keypress', this.onKeyPress.bind(this))
+    window.addEventListener('keydown', this.onKeyDown.bind(this))
+    window.addEventListener('keyup', this.onKeyUp.bind(this))
+    // Mouse
+    window.addEventListener('mousemove', this.onMouseMove.bind(this))
   }
 }
+
+// Let's go!
+let app = new App()
+app.start()
 
