@@ -1,4 +1,10 @@
-# three-starter-kit
-> Yet another threejs starter kit
+# threejs-create
+> A quick way to prototype three.js applications without spending time on boilerplate code
 
-Work in progress
+# Install
+
+# Usage
+
+# Examples
+
+# Copyright
