@@ -1,0 +1,35 @@
+{
+  "name": "threejs-create",
+  "version": "0.0.0",
+  "description": "Create a generic three.js application in no time",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "budo examples/advance.js:bundle.js --live --dir examples -- -t babelify",
+    "build": "mkdir dist && babel src/index.js -o dist/index.js",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "threejs",
+    "webgl",
+    "starterkit",
+    "boilerplate",
+    "canvas",
+    "create",
+    "prototype"
+  ],
+  "author": "Terkel Gjervig",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-latest": "^6.16.0",
+    "babelify": "^7.3.0",
+    "raf-loop": "^1.1.3",
+    "standard": "^8.5.0"
+  },
+  "dependencies": {
+    "@superguigui/wagner": "github:superguigui/wagner",
+    "defined": "^1.0.0",
+    "orbit-controls": "^1.1.1",
+    "three": "^0.82.1"
+  }
+}
