@@ -1,6 +1,8 @@
 # threejs-create
 > A quick way to prototype three.js applications without spending time on boilerplate code
 
+[![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+
 # Install
 ```$ npm install --save threejs-create```
 
@@ -30,6 +32,9 @@ CreateLoop(render).start()
 # Features
 - Built in post-processing with WAGNER
 - Easy to extend with ES6 classes
+
+# Credit
+Based on [this](https://github.com/mattdesl/codevember16/blob/master/lib/createApp.js) code by [@mattdesl](https://github.com/mattdesl)
 
 # License
 MIT © [Terkel Gjervig](https://terkel.com)
