@@ -1,12 +1,13 @@
 {
   "name": "threejs-create",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Create a generic three.js application for quick prototyping",
   "main": "dist/index.js",
   "scripts": {
     "start": "budo examples/advance.js:bundle.js --live --dir examples -- -t babelify",
-    "build": "mkdir dist && babel src/index.js -o dist/index.js",
     "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "build": "mkdir dist && babel src/index.js -o dist/index.js",
     "prepublish": "npm run build",
     "test": "standard"
   },
